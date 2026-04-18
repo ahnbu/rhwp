@@ -36,6 +36,11 @@ export interface FileHandleReadResult {
   bytes: Uint8Array;
 }
 
+export type PickOpenFileHandleResult =
+  | { status: 'picked'; handle: FileSystemFileHandleLike }
+  | { status: 'aborted' }
+  | { status: 'unsupported' };
+
 export interface SaveDocumentOptions {
   blob: Blob;
   suggestedName: string;
@@ -180,8 +185,8 @@ export function createHttpFileHandle(options: HttpFileHandleOptions): FileSystem
   };
 }
 
-export async function pickOpenFileHandle(windowLike: FileSystemWindowLike): Promise<FileSystemFileHandleLike | null> {
-  if (!windowLike.showOpenFilePicker) return null;
+export async function pickOpenFileHandle(windowLike: FileSystemWindowLike): Promise<PickOpenFileHandleResult> {
+  if (!windowLike.showOpenFilePicker) return { status: 'unsupported' };
 
   try {
     const handles = await windowLike.showOpenFilePicker({
@@ -189,9 +194,11 @@ export async function pickOpenFileHandle(windowLike: FileSystemWindowLike): Prom
       multiple: false,
       types: HWP_PICKER_TYPES,
     });
-    return handles[0] ?? null;
+    const handle = handles[0];
+    if (!handle) return { status: 'aborted' };
+    return { status: 'picked', handle };
   } catch (error) {
-    if (isAbortError(error)) return null;
+    if (isAbortError(error)) return { status: 'aborted' };
     throw error;
   }
 }

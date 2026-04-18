@@ -34,17 +34,24 @@ export const fileCommands: CommandDef[] = [
     label: '열기',
     async execute(services) {
       try {
-        const handle = await pickOpenFileHandle(window as FileSystemWindowLike);
-        if (!handle) {
-          document.getElementById('file-input')?.click();
+        const pickResult = await pickOpenFileHandle(window as FileSystemWindowLike);
+        if (pickResult.status === 'aborted') {
+          return;
+        }
+        if (pickResult.status === 'unsupported') {
+          const fileInput = document.getElementById('file-input') as HTMLInputElement | null;
+          if (fileInput) {
+            fileInput.value = '';
+            fileInput.click();
+          }
           return;
         }
 
-        const { bytes, name } = await readFileFromHandle(handle);
+        const { bytes, name } = await readFileFromHandle(pickResult.handle);
         services.eventBus.emit('open-document-bytes', {
           bytes,
           fileName: name,
-          fileHandle: handle,
+          fileHandle: pickResult.handle,
         });
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);

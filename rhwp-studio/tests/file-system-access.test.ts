@@ -47,7 +47,7 @@ function createHandle(name: string, fileContent = 'fixture') {
   };
 }
 
-test('pickOpenFileHandle는 showOpenFilePicker가 있으면 첫 handle을 반환한다', async () => {
+test('pickOpenFileHandle는 showOpenFilePicker가 있으면 picked 결과와 첫 handle을 반환한다', async () => {
   const handle = createHandle('opened.hwp');
   let receivedOptions: Record<string, unknown> | undefined;
 
@@ -58,8 +58,27 @@ test('pickOpenFileHandle는 showOpenFilePicker가 있으면 첫 handle을 반환
     },
   });
 
-  assert.equal(result, handle);
+  assert.deepEqual(result, {
+    status: 'picked',
+    handle,
+  });
   assert.ok(receivedOptions);
+});
+
+test('pickOpenFileHandle는 사용자가 picker를 취소하면 aborted를 반환한다', async () => {
+  const result = await pickOpenFileHandle({
+    showOpenFilePicker: async () => {
+      throw new DOMException('The user aborted a request.', 'AbortError');
+    },
+  });
+
+  assert.deepEqual(result, { status: 'aborted' });
+});
+
+test('pickOpenFileHandle는 showOpenFilePicker가 없으면 unsupported를 반환한다', async () => {
+  const result = await pickOpenFileHandle({});
+
+  assert.deepEqual(result, { status: 'unsupported' });
 });
 
 test('readFileFromHandle은 handle 파일 내용을 Uint8Array로 읽는다', async () => {
