@@ -5,6 +5,7 @@
 
 | 일시 | 유형 | 범위 | 변경내용 | 변경사유 | 작성AI |
 |---|---|---|---|---|---|
+| 2026-07-19 12:47 | docs | rules | CLAUDE.md 개발규칙을 AGENTS.md로 통합 + CLAUDE.md를 @AGENTS.md 포인터로 전환 | AGENTS.md 단일 정본화로 Claude·Codex·agy 모두 개발규칙 로딩 | Claude |
 | 2026-04-25 11:53 | docs | desktop-compare | HOP와 rhwp-desktop 비교분석 문서 추가 | 향후 데스크톱앱 구조와 제품 기준점 판단을 위한 참고 기록 | Codex |
 | 2026-04-23 14:30 | docs | strategy | rhwp-desktop 비교 전략과 Electron wrapper 로드맵 문서 추가 | 공개 desktop 래퍼 발견 후 실사용 전략·옵션 비교·로드맵 정리 | Claude |
 | 2026-04-18 15:10 | docs | project | 사용자 테스트 전 실제 실행 산출물 빌드 규칙 명시 | 수정본 미반영 상태에서 수동 테스트되는 문제 방지 | Codex |
