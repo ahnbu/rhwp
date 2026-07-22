@@ -1,3 +1,9 @@
+> [!NOTE]
+> **이 저장소는 포크(fork)입니다.** 원본: https://github.com/edwardkim/rhwp
+> 내 기여는 전체 597커밋 중 11커밋(약 2%)이며, 기술 스택 선택의 주체는 원본 작성자입니다.
+> 아래 배지 링크는 모두 **원본 저장소**를 가리킵니다.
+> (확인: 2026-07-22 · upstream 원격 등록됨)
+
 <p align="center">
   <img src="assets/logo/logo-256.png" alt="rhwp logo" width="128" />
 </p>
