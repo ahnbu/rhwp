@@ -5,6 +5,7 @@
 
 | 일시 | 유형 | 범위 | 변경내용 | 변경사유 | 작성AI |
 |---|---|---|---|---|---|
+| 2026-08-22 17:58 | docs | local | 런처 진입점(rhwp_launcher.ps1/.vbs)과 바로가기를 추적 대상으로 전환 + BACKLOG에 [저우선] 접두어 규칙 추가 | 로컬 실행 환경을 한컴/HOP으로 이관하며 clone 정리, 진입점만 exclude에 남아 런처 세트가 불완전했음 | Claude |
 | 2026-07-22 15:57 | docs | readme | 포크 출처 표기 추가 - 원본 레포와 기여 비율 명시 | 기술스택 전수조사 과정에서 포크 표기 누락으로 오분류 발생, 재발 방지 | Claude |
 | 2026-07-19 12:47 | docs | rules | CLAUDE.md 개발규칙을 AGENTS.md로 통합 + CLAUDE.md를 @AGENTS.md 포인터로 전환 | AGENTS.md 단일 정본화로 Claude·Codex·agy 모두 개발규칙 로딩 | Claude |
 | 2026-04-25 11:53 | docs | desktop-compare | HOP와 rhwp-desktop 비교분석 문서 추가 | 향후 데스크톱앱 구조와 제품 기준점 판단을 위한 참고 기록 | Codex |
